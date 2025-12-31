@@ -17,7 +17,7 @@ Multi-stage_continuous-flow_manufacturing_process/
 ├── PyTorch_Multi-stage.ipynb          ← PyTorch model implementation
 ├── TensorFlow_Multi-stage.ipynb       ← TensorFlow/Keras model implementation
 ├── continuous_factory_process.csv     ← Main dataset (continuous time series)
-├── README.md                          ← This file
+├── README.md                          ← README
 ```
 
 ---
@@ -120,12 +120,26 @@ This metric is robust to outliers among different target dimensions.
 
 ---
 
+## Model Performance (Median RMSE)
+
+| Model                  | Stage 1 Median RMSE | Stage 2 Median RMSE |
+|------------------------|------------------|------------------|
+| Sklearn Ridge          | 0.014            | 0.857            |
+| Sklearn ElasticNet     | 0.034            | 0.597            |
+| Sklearn ElasticNetChain| 0.033            | 0.594            |
+| Sklearn PLS            | 0.632            | 0.642            |
+| Sklearn RandomForest   | 0.416            | 0.560            |
+| Sklearn XGBoost        | 0.046            | 0.642            |
+| PyTorch TorchResMLP    | 0.221            | 0.607            |
+| TensorFlow TorchResMLP | 0.231            | 0.827            |
+
+---
+
 ## Notes and Recommendations
 
 * Classical models like ElasticNetChain often outperform naïve deep models on structured tabular data unless the architecture explicitly captures temporal dependencies.
 * Cascade training requires careful simulation of prediction noise (e.g., out-of-fold predictions) to avoid leakage.
 * Transitional approaches (hybrid or residual corrections) may yield better Stage 2 results.
-* Investigate sequence models (RNN / LSTM / GRU / TCN) if Stage 2 dynamics are strongly history-dependent.
 
 ---
 
